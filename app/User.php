@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+use DB;
+
 class User extends Authenticatable
 {
     use HasRoles;
@@ -38,4 +40,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+    *
+    * Get permission group name
+    *
+    */
+    public static function getPermissionGroups()
+    {
+        $permission_group = DB::table('permissions')
+                            ->select('group_name')
+                            ->groupBy('group_name')
+                            ->get();
+        return $permission_group;
+    }
+
+    public static function getpermissionsByGroupName($group_name)
+    {
+        $permissions = DB::table('permissions')
+            ->select('name', 'id')
+            ->where('group_name', $group_name)
+            ->get();
+        return $permissions;
+    }
 }

@@ -24,41 +24,15 @@
                     </div>
                 </div>
                 <ul class="nk-menu nk-menu-main ui-s2">
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-text">Dashboards</span>
+                    <li class="nk-menu-item">
+                        <a href="{{ route('admin.dashboard') }}" class="nk-menu-link">
+                            <span class="nk-menu-text">Dashboard</span>
                         </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/index.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">Default Dashboard</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/index-sales.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">Sales Dashboard</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/index-crypto.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">Crypto Dashboard</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/index-analytics.html" class="nk-menu-link">
-                                    <span class="nk-menu-text">Analytics Dashboard</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-heading">
-                                <h6 class="overline-title text-primary">Use-Case Concept</h6>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/invest/index.html" class="nk-menu-link" target="_blank">
-                                    <span class="nk-menu-text">Investment Panel</span>
-                                    <span class="nk-menu-badge badge-danger">HOT</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                        </ul><!-- .nk-menu-sub -->
+                    </li><!-- .nk-menu-item -->
+                    <li class="nk-menu-item">
+                        <a href="{{ route('admin.roles.index') }}" class="nk-menu-link">
+                            <span class="nk-menu-text">Roles</span>
+                        </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">

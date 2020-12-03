@@ -156,7 +156,7 @@ h6, .h6 { font-size: 1rem; }
 
 hr { margin-top: 1rem; margin-bottom: 1rem; border: 0; border-top: 1px solid #b7c2d0; }
 
-small, .small { font-size: 85%; font-weight: 400; }
+small, .small { font-size: 80%; font-weight: 400; }
 
 mark, .mark { padding: 0.2em; background-color: #fcf8e3; }
 
@@ -4916,7 +4916,7 @@ a:hover .btn-trigger:before { opacity: 1; height: 120%; width: 120%; }
 
 .form-info + .form-control { padding-right: calc(1rem + 24px); }
 
-.form-label { font-size: 0.875rem; font-weight: 500; color: #344357; margin-bottom: .5rem; }
+.form-label { font-size: 13px; font-weight: 500; color: #344357; margin-bottom: .5rem; }
 
 .form-label-group { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
 

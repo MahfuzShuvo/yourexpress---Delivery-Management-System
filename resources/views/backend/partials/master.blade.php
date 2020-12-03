@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Page Title  -->
-    <title>Your Express | Make your delivery more comforatble</title>
+    <title>@yield('title', 'Your Express | Make your delivery more comforatble')</title>
 
     {{-- css links --}}
-    @include('backend.layouts.partials.assetsLink.cssLink')
+    @include('backend.partials.assetsLink.cssLink')
+    @yield('style')
 
 </head>
 
@@ -21,7 +22,7 @@
         <div class="nk-wrap ">
             
         	{{-- header start --}}
-        	@include('backend.layouts.partials.header')
+        	@include('backend.partials.header')
         	{{-- header end --}}
 
             {{-- content section start --}}
@@ -29,7 +30,7 @@
 		    {{-- content section end --}}
             
             {{-- footer start --}}
-        	@include('backend.layouts.partials.footer')
+        	@include('backend.partials.footer')
         	{{-- footer end --}}
 
         </div>
@@ -38,8 +39,8 @@
     
 
     {{-- js links --}}
-    @include('backend.layouts.partials.assetsLink.jsLink')
-
+    @include('backend.partials.assetsLink.jsLink')
+    @yield('script')
     
 </body>
 

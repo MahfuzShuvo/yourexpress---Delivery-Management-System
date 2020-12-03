@@ -1,4 +1,4 @@
-@extends('backend.layouts.partials.master')
+@extends('backend.partials.master')
 
 @section('content')
 	<!-- content @s -->
@@ -9,9 +9,9 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">Investment Dashboard</h3>
+                                <h3 class="nk-block-title page-title">Dashboard</h3>
                                 <div class="nk-block-des text-soft">
-                                    <p>Welcome to DashLite Dashboard Template.</p>
+                                    <p>Welcome to Your Express delivery panel</p>
                                 </div>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
