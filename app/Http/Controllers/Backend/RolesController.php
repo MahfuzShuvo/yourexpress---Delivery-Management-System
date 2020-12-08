@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\User;
 
 class RolesController extends Controller
 {
@@ -28,7 +29,10 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::all();
+        $permissionGroup = User::getPermissionGroups();
+
+        return view('backend.pages.roles.create', compact('permissions', 'permissionGroup'));
     }
 
     /**
@@ -52,8 +56,9 @@ class RolesController extends Controller
         if (!empty($permission)) {
             $role->syncPermissions($permission);
         }
-
-        return back();
+        
+        session()->flash('success', 'New roles created successfully');
+        return view('backend.pages.roles.index');
     }
 
     /**
@@ -75,7 +80,11 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        $all_permissions = Permission::all();
+        $permissionGroup = User::getPermissionGroups();
+
+        return view('backend.pages.roles.edit', compact('role', 'all_permissions', 'permissionGroup'));
     }
 
     /**
@@ -87,7 +96,22 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validation 
+        // $request->validate([
+        //     'name' => 'required|max:100|unique:roles'
+        // ],[
+        //     'name.required' => 'Please give a role name'
+        // ]);
+        $role = Role::findById($id);
+
+        $permission = $request->permissions;
+
+        if (!empty($permission)) {
+            $role->syncPermissions($permission);
+        }
+        $roles = Role::all();
+        session()->flash('success', 'Role '.ucfirst($role->name).' updated successfully');
+        return redirect()->route('roles.index', compact('roles'));
     }
 
     /**
@@ -98,6 +122,13 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findById($id);
+
+        if (!is_null($role)) {
+            $role->delete();
+        }
+
+        session()->flash('success', 'Role deleted successfully');
+        return redirect()->back();
     }
 }

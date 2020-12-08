@@ -25,13 +25,13 @@
                 </div>
                 <ul class="nk-menu nk-menu-main ui-s2">
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.dashboard') }}" class="nk-menu-link">
+                        <a href="{{ route('dashboard') }}" class="nk-menu-link">
                             <span class="nk-menu-text">Dashboard</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.roles.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-text">Roles</span>
+                        <a href="{{ route('roles.index') }}" class="nk-menu-link">
+                            <span class="nk-menu-text">Roles & Permissions</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item has-sub">

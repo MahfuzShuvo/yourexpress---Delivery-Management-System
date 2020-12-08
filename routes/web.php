@@ -23,8 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
 *	Admin routes
 */
-Route::group(['prefix' => 'admin'], function() {
-	Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
-	Route::resource('roles', 'Backend\RolesController', ['names' => 'admin.roles']);
-});
-
+Route::get('/dashboard', 'Backend\DashboardController@index')->name('dashboard');
+Route::resource('/roles', 'Backend\RolesController', ['names' => 'roles']);

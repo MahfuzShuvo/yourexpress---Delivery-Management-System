@@ -22,7 +22,7 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">All Roles</h3>
+                                <h3 class="nk-block-title page-title">Role Lists</h3>
                                 <div class="nk-block-des text-soft">
                                     <p>You have total {{ $roles->count() }} roles</p>
                                 </div>
@@ -35,10 +35,10 @@
                                     <div class="toggle-expand-content" data-content="more-options">
                                         <ul class="nk-block-tools g-3">
                                             <li class="nk-block-tools-opt">
-                                                <a href="#" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                <a href="{{ route('roles.create') }}" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
                                                     <em class="icon ni ni-plus"></em>
                                                 </a>
-                                                <a href="#" class="btn btn-primary d-none d-md-inline-flex btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                <a href="{{ route('roles.create') }}" class="btn btn-primary d-none d-md-inline-flex btn-sm">
                                                     <em class="icon ni ni-plus"></em>
                                                     <span>Add</span>
                                                 </a>
@@ -64,9 +64,9 @@
                                                             </div>
                                                         </th> --}}
                                                         <th class="nk-tb-col"><span class="sub-text">#</span></th>
-                                                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Roles</span></th>
-                                                        {{-- <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
-                                                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
+                                                        <th class="nk-tb-col"><span class="sub-text">Roles</span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Permissions</span></th>
+                                                        {{-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
                                                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Last Login</span></th>
                                                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th> --}}
                                                         <th class="nk-tb-col nk-tb-col-tools text-right">
@@ -99,11 +99,26 @@
                                                             {{-- <td class="nk-tb-col tb-col-md">
                                                                 <span>+811 847-4958</span>
                                                             </td> --}}
-                                                            <td class="nk-tb-col tb-col-md">
+                                                            <td class="nk-tb-col" style="width: 10%;">
                                                                 {{ $key + 1 }}
                                                             </td>
-                                                            <td class="nk-tb-col tb-col-md">
+                                                            <td class="nk-tb-col" style="width: 20%;">
                                                                 {{ ucfirst($role->name) }}
+                                                            </td>
+                                                            <td class="nk-tb-col tb-col-md" style="white-space: normal; width: 50%;">
+                                                        		@foreach ($role->permissions as $perm)
+                                                                	@if (Str::contains($perm->name, 'view'))
+                                                                		<span class="badge badge-outline-success badge-dim">{{ $perm->name }}</span>
+                                                                	@elseif (Str::contains($perm->name, 'edit'))
+                                                                		<span class="badge badge-outline-warning badge-dim">{{ $perm->name }}</span>
+                                                                	@elseif (Str::contains($perm->name, 'create'))
+                                                                		<span class="badge badge-outline-primary badge-dim">{{ $perm->name }}</span>
+                                                                	@elseif (Str::contains($perm->name, 'delete'))
+                                                                		<span class="badge badge-outline-danger badge-dim">{{ $perm->name }}</span>
+                                                                	@else
+                                                                		<span class="badge badge-outline-info badge-dim">{{ $perm->name }}</span>
+                                                                	@endif
+                                                                @endforeach
                                                             </td>
                                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                                 <ul class="list-status">
@@ -113,13 +128,21 @@
                                                             </td>
                                                             <td class="nk-tb-col tb-col-lg">
                                                                 <span>05 Oct 2019</span>
-                                                            </td>
-                                                            <td class="nk-tb-col tb-col-md">
-                                                                <span class="tb-status text-success">Active</span>
                                                             </td> --}}
-                                                            <td class="nk-tb-col nk-tb-col-tools">
+                                                            <td class="nk-tb-col text-center" style="width: 20%;">
+                                                                <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Edit Role">
+                                                                    <em class="icon ni ni-edit"></em>
+                                                                </a>
+                                                                <span data-target="#deleteModal{{ $role->id }}" data-toggle="modal">
+                                                                	<a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Delete Role">
+                                                                    <em class="icon ni ni-trash"></em>
+                                                                </a>
+                                                                </span>
+                                                                
+                                                            </td>
+                                                            {{-- <td class="nk-tb-col nk-tb-col-tools">
                                                                 <ul class="nk-tb-actions gx-1">
-                                                                    {{-- <li class="nk-tb-action-hidden">
+                                                                    <li class="nk-tb-action-hidden">
                                                                         <a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Wallet">
                                                                             <em class="icon ni ni-wallet-fill"></em>
                                                                         </a>
@@ -133,7 +156,7 @@
                                                                         <a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Suspend">
                                                                             <em class="icon ni ni-user-cross-fill"></em>
                                                                         </a>
-                                                                    </li> --}}
+                                                                    </li>
                                                                     <li>
                                                                         <div class="drodown">
                                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
@@ -152,8 +175,34 @@
                                                                         </div>
                                                                     </li>
                                                                 </ul>
-                                                            </td>
+                                                            </td> --}}
                                                         </tr><!-- .nk-tb-item  -->
+
+                                                        <!-- Delete Modal start -->
+				                                        <div class="modal fade" tabindex="-1" id="deleteModal{{ $role->id }}">
+				                                            <div class="modal-dialog modal-dialog-top" role="document">
+				                                                <div class="modal-content">
+				                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+				                                                        <em class="icon ni ni-cross"></em>
+				                                                    </a>
+				                                                    <div class="modal-header">
+				                                                        <h6 class="modal-title">Are you sure to delete?</h6>
+				                                                    </div>
+				                                                    {{-- <div class="modal-body">
+				                                                        
+				                                                    </div> --}}
+				                                                    <div class="modal-footer">
+				                                                        <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+				                                                        	@method('delete')
+				                                                            {{ csrf_field() }}
+				                                                            <button type="submit" class="btn btn-info btn-sm" style="font-size: 13px;">YES, delete permanently</button>
+				                                                        </form>
+				                                                        <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal" style="font-weight: 400; font-size: 12px;">NO</button>
+				                                                    </div>
+				                                                </div>
+				                                            </div>
+				                                        </div>
+				                                        <!-- Delete Modal end -->
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -167,130 +216,6 @@
         </div>
     </div>
     <!-- content @e -->
-
-{{-- add roles modal --}}
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                <em class="icon ni ni-cross"></em>
-            </a>
-            <div class="modal-header">
-                <h5 class="modal-title">Add Roles</h5>
-            </div>
-            <form action="{{ route('admin.roles.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="row ml-2 mr-2">
-                    <div class="col-md-12">
-                        <div class="small-txt">
-                            <small class="font-italic text-soft">The field labels marked with * are required input fields.</small>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="default-06">Role Name</label><span style="color: red; font-weight: bold;"> *</span>
-                            <div class="form-control-wrap">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Enter a role name" >
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="default-06">Permissions</label><span style="color: red; font-weight: bold;"> *</span>
-                            <div class="form-control-wrap">
-                                <div class="custom-control custom-control-sm custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="permissionCheckAll" value="1">
-                                    <label class="custom-control-label" for="permissionCheckAll">All</label>
-                                </div>
-                                <hr>
-
-                                @php $i = 1; @endphp
-                                @foreach (App\User::getPermissionGroups() as $group)
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <div class="custom-control custom-control-sm custom-checkbox" style="font-weight: bold;">
-                                                <input type="checkbox" class="custom-control-input" id="{{ $i }}Management" value="{{ $group->group_name }}" onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)">
-                                                <label class="custom-control-label" for="{{ $i }}Management">{{ $group->group_name }}</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-9 role-{{ $i }}-management-checkbox">
-                                            @php
-                                                $permissions = App\User::getpermissionsByGroupName($group->group_name);
-                                                $j = 1;
-                                            @endphp
-                                            @foreach ($permissions as $permission)
-                                                <div class="custom-control custom-control-sm custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
-                                                    <label class="custom-control-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
-                                                </div>
-                                                @php  $j++; @endphp
-                                            @endforeach
-                                            <br>
-                                        </div>
-
-                                    </div>
-                                    @php  $i++; @endphp
-                                @endforeach
-                            </div>
-                        </div>
-                        
-                        {{-- <div class="form-group">
-                            <label class="form-label" for="default-06">Product Description (in short)</label><span style="color: red; font-weight: bold;"> *</span>
-                            <div class="form-control-wrap">
-                                <textarea type="text" class="form-control @error('short_description') is-invalid @enderror" id="short_description" name="short_description" placeholder="Description" rows="2" >{{ old('short_description') }}</textarea>
-                                @error('short_description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="default-06">Product Description (in details)</label><span style="color: red; font-weight: bold;"> *</span>
-                            <div class="form-control-wrap">
-                                <textarea type="text" class="form-control @error('description') is-invalid @enderror" id="summary-ckeditor" name="description" placeholder="Description" rows="2" >{{ old('description') }}</textarea>
-                                @error('description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="default-06">Display Image</label><span style="color: red; font-weight: bold;"> *</span>
-                                    <div class="form-control-wrap">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input @error('display_image') is-invalid @enderror" value="{{ old('display_image') }}" id="display_image" name="display_image">
-                                            <label class="custom-file-label" for="display_image">Choose single file</label>
-                                            @error('display_image')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        
-                    </div>
-                </div>
-                <div class="row ml-2 mr-2 mb-2 mt-2">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-md btn-primary">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('script')
@@ -302,7 +227,7 @@
 
     {{-- check all permission --}}
     <script type="text/javascript">
-        $("#permissionCheckAll").click(function () {
+        $("#permissionCheckAll_1").click(function () {
             if ($(this).is(':checked')) {
                 // check all
                 $('input[type=checkbox]').prop('checked', true);
