@@ -56,9 +56,9 @@ class RolesController extends Controller
         if (!empty($permission)) {
             $role->syncPermissions($permission);
         }
-        
+
         session()->flash('success', 'New roles created successfully');
-        return view('backend.pages.roles.index');
+        return redirect()->route('roles.index');
     }
 
     /**

@@ -114,7 +114,9 @@
                                                                 {{ $user->phone }}
                                                             </td>
                                                             <td class="nk-tb-col tb-col-md">
-                                                                <span class="badge badge-info">{{ $user->role }}</span>
+                                                                @foreach ($user->roles as $role)
+                                                                    <span class="badge badge-info">{{ $role->name }}</span>
+                                                                @endforeach
                                                             </td>
                                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                                 <ul class="list-status">

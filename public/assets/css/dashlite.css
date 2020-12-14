@@ -745,7 +745,7 @@ pre code { font-size: inherit; color: inherit; word-break: normal; }
 
 .table-responsive > .table-bordered { border: 0; }
 
-.form-control { display: block; width: 100%; height: calc(2.125rem + 2px); padding: 0.4375rem 1rem; font-size: 0.8125rem; font-weight: 400; line-height: 1.25rem; color: #3c4d62; background-color: #fff; background-clip: padding-box; border: 1px solid #dbdfea; border-radius: 4px; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+.form-control { display: block; width: 100%; height: calc(2.125rem + 2px); padding: 0.4375rem 1rem; font-size: 12px; font-weight: 400; line-height: 1.25rem; color: #3c4d62; background-color: #fff; background-clip: padding-box; border: 1px solid #dbdfea; border-radius: 4px; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
 
 @media (prefers-reduced-motion: reduce) { .form-control { transition: none; } }
 
@@ -783,7 +783,7 @@ select.form-control[size], select.form-control[multiple] { height: auto; }
 
 textarea.form-control { height: auto; }
 
-.form-group { margin-bottom: 1rem; }
+.form-group { margin-bottom: 8px; }
 
 .form-text { display: block; margin-top: 0.25rem; }
 
@@ -1687,7 +1687,18 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 
 .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus { color: #fff; }
 
-.card { position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 0 solid rgba(0, 0, 0, 0.125); border-radius: 4px; }
+.card { 
+  position: relative; 
+  display: flex; 
+  flex-direction: column; 
+  min-width: 0; 
+  word-wrap: break-word; 
+  background-color: #fff; 
+  background-clip: border-box; 
+  border: 1px solid #ffecde; 
+  border-radius: 4px; 
+  /*box-shadow: 1px 3px 10px #fff3e9;*/
+}
 
 .card > hr { margin-right: 0; margin-left: 0; }
 
@@ -3833,7 +3844,7 @@ h5, .h5, h6, .h6 { letter-spacing: -0.01em; }
 
 .text-soft { 
   color: #8094ae !important; 
-  font-size: 12px;
+  /*font-size: 12px;*/
 }
 
 .text-base { color: #526484 !important; }
@@ -5066,7 +5077,10 @@ a:hover .btn-trigger:before { opacity: 1; height: 120%; width: 120%; }
 
 .form-control-simple:focus { box-shadow: none; }
 
-.form-group { position: relative; margin-bottom: 1.25rem; }
+.form-group { 
+  position: relative; 
+  /*margin-bottom: 1.25rem; */
+}
 
 .form-group:last-child { margin-bottom: 0; }
 

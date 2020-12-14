@@ -240,7 +240,7 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-xl-block">
-                                    <div class="user-status">{{ Auth::user()->role }}</div>
+                                    <div class="user-status"><small>{{ Auth::user()->phone }}</small></div>
                                     <div class="user-name dropdown-indicator">{{ Auth::user()->name }}</div>
                                 </div>
                             </div>
