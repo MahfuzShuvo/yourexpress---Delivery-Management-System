@@ -1,7 +1,7 @@
 @extends('backend.partials.master')
 
 @section('title')
-    Your Express - Roles
+    Roles | Your Express
 @endsection
 
 @section('style')

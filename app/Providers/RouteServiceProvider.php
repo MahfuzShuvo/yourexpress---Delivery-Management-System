@@ -21,7 +21,15 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
+
+
+    /**
+     * The path to the "merchant" route for your application.
+     *
+     * @var string
+     */
+    public const MERCHANT_HOME = '/merchant';
 
     /**
      * Define your route model bindings, pattern filters, etc.

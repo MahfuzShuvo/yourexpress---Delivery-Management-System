@@ -14,10 +14,10 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         // create roles
-        $roleSuperAdmin = Role::create(['name' => 'superadmin']);
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleMerchant = Role::create(['name' => 'merchant']);
-        $roleUser = Role::create(['name' => 'user']);
+        $roleSuperAdmin = Role::create(['name' => 'SuperAdmin']);
+        $roleAdmin = Role::create(['name' => 'Admin']);
+        $roleMerchant = Role::create(['name' => 'Merchant']);
+        $roleUser = Role::create(['name' => 'User']);
 
         // permission list as array
         $permissions = [
