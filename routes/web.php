@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'Backend\DashboardController@index')->name('dashboard');
 Route::resource('/roles', 'Backend\RolesController', ['names' => 'roles']);
 Route::resource('/teams', 'Backend\UsersController', ['names' => 'users']);
+Route::resource('/riders', 'Backend\RidersController', ['names' => 'riders']);
 
 
 /**

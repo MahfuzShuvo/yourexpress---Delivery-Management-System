@@ -48,7 +48,7 @@
                                 <a href="{{ route('users.index') }}" class="nk-menu-link"><span class="nk-menu-text">All Teams</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Riders</span></a>
+                                <a href="{{ route('riders.index') }}" class="nk-menu-link"><span class="nk-menu-text">Riders</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->

@@ -26,9 +26,10 @@
                                                     <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <ul class="link-list-opt no-bdr">
-                                                            <li><a href="#"><em class="icon ni ni-user-add-fill"></em><span>Add Team</span></a></li>
+                                                            <li><a href="{{ route('users.create') }}"><em class="icon ni ni-user-add-fill"></em><span>Add Team</span></a></li>
+                                                            <li><a href="#"><em class="icon ni ni-happyf-fill"></em><span>Add Rider</span></a></li>
                                                             <li><a href="#"><em class="icon ni ni-coin-alt-fill"></em><span>Add Merchant</span></a></li>
-                                                            <li><a href="#"><em class="icon ni ni-note-add-fill-c"></em><span>Add Parcel</span></a></li>
+                                                            <li><a href="#"><em class="icon ni ni-bag-fill"></em><span>Add Parcel</span></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

@@ -16,8 +16,8 @@ class RolePermissionSeeder extends Seeder
         // create roles
         $roleSuperAdmin = Role::create(['name' => 'SuperAdmin']);
         $roleAdmin = Role::create(['name' => 'Admin']);
-        $roleMerchant = Role::create(['name' => 'Merchant']);
-        $roleUser = Role::create(['name' => 'User']);
+        $roleRider = Role::create(['name' => 'Rider']);
+        $roleStaff = Role::create(['name' => 'Staff']);
 
         // permission list as array
         $permissions = [
@@ -63,6 +63,30 @@ class RolePermissionSeeder extends Seeder
                     'profile.edit',
                     'profile.delete',
                     'profile.approve',
+                ]
+            ],
+
+            // team permissions
+            [
+                'group_name' => 'team',
+                'permissions' => [
+                    'team.create',
+                    'team.view',
+                    'team.edit',
+                    'team.delete',
+                    'team.approve',
+                ]
+            ],
+
+            // rider permissions
+            [
+                'group_name' => 'rider',
+                'permissions' => [
+                    'rider.create',
+                    'rider.view',
+                    'rider.edit',
+                    'rider.delete',
+                    'rider.approve',
                 ]
             ]
         ];

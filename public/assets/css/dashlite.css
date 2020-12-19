@@ -9971,7 +9971,10 @@ span[data-toggle=tooltip]:focus { outline: none; }
 
 .link-list-opt a { display: flex; align-items: center; padding: .625rem 1.25rem; font-size: 12px; font-weight: 500; color: #526484; transition: all .4s; line-height: 1.3rem; position: relative; }
 
-.link-list-opt a:hover { color: #6576ff; background: #f5f6fa; }
+.link-list-opt a:hover { 
+  color: #f5832b;
+  background: #fffaf7;
+}
 
 .link-list-opt a .icon { font-size: 1.125rem; width: 1.75rem; opacity: .8; }
 

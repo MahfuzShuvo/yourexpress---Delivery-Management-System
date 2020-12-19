@@ -10,12 +10,8 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
-class UsersController extends Controller
+class RidersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +20,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('backend.pages.users.index', compact('users'));
+        return view('backend.pages.users.riders.index', compact('users'));
     }
 
     /**
@@ -34,8 +30,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('backend.pages.users.create', compact('roles'));
+        return view('backend.pages.users.riders.create');
     }
 
     /**
@@ -62,12 +57,11 @@ class UsersController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        if ($request->role) {
-            $user->assignRole($request->role);
-        }
+        
+        $user->assignRole('Rider');
 
-        session()->flash('success', 'Team member created successfully');
-        return redirect()->route('users.index');
+        session()->flash('success', 'Rider created successfully');
+        return redirect()->route('riders.index');
     }
 
     /**
@@ -90,9 +84,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::all();
 
-        return view('backend.pages.users.edit', compact('roles', 'user'));
+        return view('backend.pages.users.riders.edit', compact('user'));
     }
 
     /**
@@ -120,14 +113,8 @@ class UsersController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        $user->roles()->detach();
-
-        if ($request->role) {
-            $user->assignRole($request->role);
-        }
-
-        session()->flash('success', 'Team member updated successfully');
-        return redirect()->route('users.index');
+        session()->flash('success', 'Rider updated successfully');
+        return redirect()->route('riders.index');
     }
 
     /**
@@ -144,7 +131,7 @@ class UsersController extends Controller
             $user->delete();
         }
 
-        session()->flash('success', 'User deleted successfully');
+        session()->flash('success', 'Rider deleted successfully');
         return redirect()->back();
     }
 }
