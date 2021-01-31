@@ -48,7 +48,7 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         // Attempt to login
-        if (Auth::guard('merchant')->attempt(['phone' => $request->phone, 'password' => $request->password], $request->remember)) {
+        if (Auth::guard('merchant')->attempt(['phone' => $request->phone, 'password' => $request->password, 'status' => 1], $request->remember)) {
             session()->flash('success', 'Successfully logged in');
             return redirect()->intended(route('merchant.dashboard'));
         } else {

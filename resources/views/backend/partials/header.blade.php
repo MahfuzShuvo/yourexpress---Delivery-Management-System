@@ -1,4 +1,3 @@
-<!-- main header @s -->
 <div class="nk-header nk-header-fluid is-theme">
     <div class="container-xl wide-xl">
         <div class="nk-header-wrap">
@@ -24,22 +23,22 @@
                     </div>
                 </div>
                 <ul class="nk-menu nk-menu-main ui-s2">
-                    <li class="nk-menu-item">
+                    <li class="nk-menu-item {{ (url()->current() == 'http://localhost/yourexpress/dashboard') ? 'active current-page':'' }}">
                         <a href="{{ route('dashboard') }}" class="nk-menu-link">
                             <span class="nk-menu-text">Dashboard</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                    <li class="nk-menu-item {{ (url()->current() == 'http://localhost/yourexpress/parcels') ? 'active current-page':'' }}">
+                        <a href="{{ route('parcels.index') }}" class="nk-menu-link">
                             <span class="nk-menu-text">Parcels</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                    <li class="nk-menu-item {{ (url()->current() == 'http://localhost/yourexpress/merchants') ? 'active current-page':'' }}">
+                        <a href="{{ route('merchants.index') }}" class="nk-menu-link">
                             <span class="nk-menu-text">Merchants</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
+                    <li class="nk-menu-item has-sub {{ (url()->current() == 'http://localhost/yourexpress/teams') ? 'active current-page':'' }}">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-text">Teams</span>
                         </a>
@@ -52,7 +51,7 @@
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
+                    <li class="nk-menu-item {{ (url()->current() == 'http://localhost/yourexpress/roles') ? 'active current-page':'' }}">
                         <a href="{{ route('roles.index') }}" class="nk-menu-link">
                             <span class="nk-menu-text">Roles & Permissions</span>
                         </a>
@@ -110,7 +109,7 @@
                             <span class="nk-menu-text">Settings</span>
                         </a>
                         <ul class="nk-menu-sub">
-                            <li class="nk-menu-item has-sub">
+                            {{-- <li class="nk-menu-item has-sub">
                                 <a href="#" class="nk-menu-link nk-menu-toggle">
                                     <span class="nk-menu-text">Auth Pages</span>
                                 </a>
@@ -147,9 +146,9 @@
                                         <a href="html/pages/errors/504-s1.html" target="_blank" class="nk-menu-link"><span class="nk-menu-text">504 Modern</span></a>
                                     </li>
                                 </ul><!-- .nk-menu-sub -->
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/_blank.html" class="nk-menu-link"><span class="nk-menu-text">Blank / Startup</span></a>
+                            </li><!-- .nk-menu-item --> --}}
+                            <li class="nk-menu-item {{ (url()->current() == 'http://localhost/yourexpress/packages') ? 'active current-page':'' }}">
+                                <a href="{{ route('packages.index') }}" class="nk-menu-link"><span class="nk-menu-text">Delivery packages</span></a>
                             </li>
                             <li class="nk-menu-item">
                                 <a href="html/pages/terms-policy.html" class="nk-menu-link"><span class="nk-menu-text">Terms / Policy</span></a>
@@ -293,4 +292,3 @@
         </div><!-- .nk-header-wrap -->
     </div><!-- .container-fliud -->
 </div>
-<!-- main header @e -->

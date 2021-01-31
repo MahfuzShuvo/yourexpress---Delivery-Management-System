@@ -24,9 +24,26 @@ Route::get('/home', 'HomeController@index')->name('home');
 *	Backend Routes
 */
 Route::get('/dashboard', 'Backend\DashboardController@index')->name('dashboard');
+
 Route::resource('/roles', 'Backend\RolesController', ['names' => 'roles']);
+
 Route::resource('/teams', 'Backend\UsersController', ['names' => 'users']);
+
 Route::resource('/riders', 'Backend\RidersController', ['names' => 'riders']);
+
+Route::resource('/packages', 'Backend\PackagesController', ['names' => 'packages']);
+
+Route::resource('/parcels', 'Backend\ParcelsController', ['names' => 'parcels']);
+Route::get('/parcels/status_confirm/{id}', 'Backend\ParcelsController@status_confirm');
+Route::post('/parcels/status_ship/{id}', 'Backend\ParcelsController@status_ship');
+Route::post('/parcels/status_reschedule/{id}', 'Backend\ParcelsController@status_reschedule');
+Route::get('/parcels/status_return/{id}', 'Backend\ParcelsController@status_return');
+Route::get('/parcels/status_done/{id}', 'Backend\ParcelsController@status_done');
+Route::get('/parcels/pricing/{id}', 'Backend\ParcelsController@pricing');
+
+
+Route::resource('/merchants', 'Backend\MerchantsController', ['names' => 'merchants']);
+Route::get('/merchants/status/{id}', 'Backend\MerchantsController@status');
 
 
 /**
@@ -52,4 +69,9 @@ Route::group(['prefix' => 'merchant'], function () {
 	// Forget Password Routes
 	Route::get('/password/reset', 'Backend\Merchant\Auth\ForgotPasswordController@showLinkRequestForm')->name('merchant.password.request');
 	Route::post('/password/reset/submit', 'Backend\Merchant\Auth\ForgotPasswordController@reset')->name('merchant.password.update');
+
+
 });
+
+// Merchant Parcel Routes
+Route::resource('/parcels_of_merchant', 'Backend\Merchant\ParcelsController', ['names' => 'merchant_parcels']);

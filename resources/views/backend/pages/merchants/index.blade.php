@@ -1,7 +1,7 @@
 @extends('backend.partials.master')
 
 @section('title')
-    Riders | Your Express
+    Merchants | Your Express
 @endsection
 
 @section('style')
@@ -22,14 +22,9 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">Riders</h3>
+                                <h3 class="nk-block-title page-title">Merchants</h3>
                                 <div class="nk-block-des text-soft">
-                                    @foreach ($users as $user)
-                                        @php
-                                            $riderCount = $user->hasRole('Rider');
-                                        @endphp
-                                    @endforeach
-                                    <p>You have total @if ($riderCount) {{ $riderCount }} @else {{ 0 }} @endif Riders</p>
+                                    <p>You have total {{ $merchants->count() }} Merchants</p>
                                 </div>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
@@ -40,10 +35,10 @@
                                     <div class="toggle-expand-content" data-content="more-options">
                                         <ul class="nk-block-tools g-3">
                                             <li class="nk-block-tools-opt">
-                                                <a href="{{ route('riders.create') }}" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                <a href="{{ route('merchants.create') }}" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
                                                     <em class="icon ni ni-plus"></em>
                                                 </a>
-                                                <a href="{{ route('riders.create') }}" class="btn btn-primary d-none d-md-inline-flex btn-sm">
+                                                <a href="{{ route('merchants.create') }}" class="btn btn-primary d-none d-md-inline-flex btn-sm">
                                                     <em class="icon ni ni-plus"></em>
                                                     <span>Add</span>
                                                 </a>
@@ -69,10 +64,12 @@
                                                             </div>
                                                         </th> --}}
                                                         <th class="nk-tb-col"><span class="sub-text">#</span></th>
-                                                        <th class="nk-tb-col"><span class="sub-text">Name</span></th>
-                                                        <th class="nk-tb-col"><span class="sub-text">Email</span></th>
-                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
-                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Role</span></th>
+                                                        <th class="nk-tb-col"><span class="sub-text">Merchant</span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Company</span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Pickup</span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">NID/Passport No.</span></th>
+                                                        <th class="nk-tb-col"><span class="sub-text">Phone</span></th>
+                                                        <th class="nk-tb-col"><span class="sub-text">Status</span></th>
                                                         {{-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
                                                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Last Login</span></th>
                                                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th> --}}
@@ -81,26 +78,62 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($users as $key => $user)
-                                                        @foreach ($user->roles as $r)
-                                                            @if ($r->name == 'Rider')
+                                                    @foreach ($merchants as $key => $merchant)
                                                         <tr class="nk-tb-item">
                                                             <td class="nk-tb-col">
                                                                 {{ $key + 1 }}
                                                             </td>
+                                                            {{-- <td class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input" id="uid1">
+                                                                    <label class="custom-control-label" for="uid1"></label>
+                                                                </div>
+                                                            </td> --}}
                                                             <td class="nk-tb-col">
-                                                                {{ ucfirst($user->name) }}
+                                                                <div class="user-card">
+                                                                    <div class="user-avatar bg-dim-primary d-none d-sm-flex">
+                                                                        <img src="{{ asset($merchant->photo) }}" style="width: 40px; height: 40px;">
+                                                                    </div>
+                                                                    <div class="user-info">
+                                                                        <span class="tb-lead">{{ $merchant->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                                                        <span>{{ $merchant->email }}</span>
+                                                                    </div>
+                                                                </div>
                                                             </td>
-                                                            <td class="nk-tb-col">
-                                                                {{ $user->email }}
+                                                            {{-- <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                                                <span class="tb-amount">35040.34 <span class="currency">USD</span></span>
+                                                            </td> --}}
+                                                            {{-- <td class="nk-tb-col tb-col-md">
+                                                                <span>+811 847-4958</span>
+                                                            </td> --}}
+                                                            <td class="nk-tb-col tb-col-md">
+                                                                <div class="user-info">
+                                                                        <span class="tb-lead">{{ $merchant->company }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                                                        <span>
+                                                                            <b>Website: </b>{{ $merchant->website }}<br>
+                                                                            <b>Company Address: </b>{{ $merchant->address }}
+                                                                        </span>
+                                                                    </div>
                                                             </td>
                                                             <td class="nk-tb-col tb-col-md">
-                                                                {{ $user->phone }}
+                                                                <span style="font-size: 11px;">
+                                                                    <b>Type: </b>{{ $merchant->pickup_type }}<br>
+                                                                    <b>Address: </b>{{ $merchant->pickup }}<br>
+                                                                    <b>Zone: </b>{{ $merchant->zone }}
+                                                                </span>
                                                             </td>
                                                             <td class="nk-tb-col tb-col-md">
-                                                                @foreach ($user->roles as $role)
-                                                                    <span class="badge badge-info">{{ $role->name }}</span>
-                                                                @endforeach
+                                                                {{ $merchant->identity }}
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                {{ $merchant->phone }}
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                @if ($merchant->status == 0)
+                                                                    <span class="badge badge-dot badge-danger" style="font-size: 11px; font-weight: bold;">Inactive</span>
+                                                                @else
+                                                                    <span class="badge badge-dot badge-success" style="font-size: 11px; font-weight: bold">Active</span>
+                                                                @endif
                                                             </td>
                                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                                 <ul class="list-status">
@@ -112,11 +145,21 @@
                                                                 <span>05 Oct 2019</span>
                                                             </td> --}}
                                                             <td class="nk-tb-col text-center">
-                                                                <a href="{{ route('riders.edit', $user->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Edit user">
+                                                                @if ($merchant->status == 0)
+                                                                    <a href="{{ url('/merchants/status', $merchant->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Mark as Active">
+                                                                        <em class="icon ni ni-check-circle-cut" style="color: #1ee0ac;"></em>
+                                                                    </a>
+                                                                @else
+                                                                    <a href="{{ url('/merchants/status', $merchant->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Ban Merchant">
+                                                                        <em class="icon ni ni-cross-circle" style="color: #e85347;"></em>
+                                                                    </a>
+                                                                @endif
+                                                                
+                                                                <a href="{{ route('merchants.edit', $merchant->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Edit Merchant">
                                                                     <em class="icon ni ni-edit"></em>
                                                                 </a>
-                                                                <span data-target="#deleteModal{{ $user->id }}" data-toggle="modal">
-                                                                	<a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Delete Role">
+                                                                <span data-target="#deleteModal{{ $merchant->id }}" data-toggle="modal">
+                                                                	<a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Delete Merchant">
                                                                     <em class="icon ni ni-trash"></em>
                                                                 </a>
                                                                 </span>
@@ -161,7 +204,7 @@
                                                         </tr><!-- .nk-tb-item  -->
 
                                                         <!-- Delete Modal start -->
-				                                        <div class="modal fade" tabindex="-1" id="deleteModal{{ $user->id }}">
+				                                        <div class="modal fade" tabindex="-1" id="deleteModal{{ $merchant->id }}">
 				                                            <div class="modal-dialog modal-dialog-top" role="document">
 				                                                <div class="modal-content">
 				                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -174,7 +217,7 @@
 				                                                        
 				                                                    </div> --}}
 				                                                    <div class="modal-footer">
-				                                                        <form action="{{ route('riders.destroy', $user->id) }}" method="post">
+				                                                        <form action="{{ route('merchants.destroy', $merchant->id) }}" method="post">
 				                                                        	@method('delete')
 				                                                            {{ csrf_field() }}
 				                                                            <button type="submit" class="btn btn-info btn-sm" style="font-size: 13px;">YES, delete permanently</button>
@@ -185,8 +228,6 @@
 				                                            </div>
 				                                        </div>
 				                                        <!-- Delete Modal end -->
-                                                        @endif
-                                                        @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>

@@ -63,8 +63,8 @@ class AuthController extends Controller
         $merchant->website = $request->website;
         $merchant->address = $request->address;
         $merchant->pickup = $request->pickup;
-        $merchant->pickup_type = 'all';
-        $merchant->zone = 'dhaka';
+        $merchant->pickup_type = implode(", ", $request->pickup_type);
+        $merchant->zone = implode(", ", $request->zone);
         $merchant->phone = $request->phone;
         $merchant->identity = $request->identity;
         $merchant->status = 0;

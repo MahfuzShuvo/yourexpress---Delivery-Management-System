@@ -1,7 +1,7 @@
 @extends('backend.partials.master')
 
 @section('title')
-    Riders | Your Express
+    Parcel Packages | Your Express
 @endsection
 
 @section('style')
@@ -22,14 +22,9 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h3 class="nk-block-title page-title">Riders</h3>
+                                <h3 class="nk-block-title page-title">Packages</h3>
                                 <div class="nk-block-des text-soft">
-                                    @foreach ($users as $user)
-                                        @php
-                                            $riderCount = $user->hasRole('Rider');
-                                        @endphp
-                                    @endforeach
-                                    <p>You have total @if ($riderCount) {{ $riderCount }} @else {{ 0 }} @endif Riders</p>
+                                    <p>You have total {{ $packages->count() }} Packages</p>
                                 </div>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
@@ -40,10 +35,10 @@
                                     <div class="toggle-expand-content" data-content="more-options">
                                         <ul class="nk-block-tools g-3">
                                             <li class="nk-block-tools-opt">
-                                                <a href="{{ route('riders.create') }}" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                <a href="{{ route('packages.create') }}" class="btn btn-icon btn-primary d-md-none" data-toggle="modal" data-target=".bd-example-modal-lg">
                                                     <em class="icon ni ni-plus"></em>
                                                 </a>
-                                                <a href="{{ route('riders.create') }}" class="btn btn-primary d-none d-md-inline-flex btn-sm">
+                                                <a href="{{ route('packages.create') }}" class="btn btn-primary d-none d-md-inline-flex btn-sm">
                                                     <em class="icon ni ni-plus"></em>
                                                     <span>Add</span>
                                                 </a>
@@ -70,9 +65,13 @@
                                                         </th> --}}
                                                         <th class="nk-tb-col"><span class="sub-text">#</span></th>
                                                         <th class="nk-tb-col"><span class="sub-text">Name</span></th>
-                                                        <th class="nk-tb-col"><span class="sub-text">Email</span></th>
-                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
-                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Role</span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Area</span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Schedule <small>(in Hrs)</small></span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Upto 1 kg <small>(&#2547;)</small></span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Upto 2 kg <small>(&#2547;)</small></span></th>
+                                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Upto 32 kg <small>(&#2547;)</small></span></th>
+                                                        <th class="nk-tb-col"><span class="sub-text">Over 3 kg <small>(&#2547;/kg)</small></span></th>
+                                                        <th class="nk-tb-col"><span class="sub-text">Status</span></th>
                                                         {{-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Verified</span></th>
                                                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Last Login</span></th>
                                                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th> --}}
@@ -81,26 +80,58 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($users as $key => $user)
-                                                        @foreach ($user->roles as $r)
-                                                            @if ($r->name == 'Rider')
+                                                    @foreach ($packages as $key => $package)
                                                         <tr class="nk-tb-item">
                                                             <td class="nk-tb-col">
                                                                 {{ $key + 1 }}
                                                             </td>
-                                                            <td class="nk-tb-col">
-                                                                {{ ucfirst($user->name) }}
-                                                            </td>
-                                                            <td class="nk-tb-col">
-                                                                {{ $user->email }}
+                                                            {{-- <td class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input" id="uid1">
+                                                                    <label class="custom-control-label" for="uid1"></label>
+                                                                </div>
+                                                            </td> --}}
+                                                            {{-- <td class="nk-tb-col">
+                                                                <div class="user-card">
+                                                                    <div class="user-avatar bg-dim-primary d-none d-sm-flex">
+                                                                        <img src="{{ asset($package->photo) }}" style="width: 40px; height: 40px;">
+                                                                    </div>
+                                                                    <div class="user-info">
+                                                                        <span class="tb-lead">{{ $package->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                                                        <span>{{ $package->email }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </td> --}}
+                                                            <td class="nk-tb-col tb-col-mb" data-order="35040.34">
+                                                                <span class="tb-amount">{{ $package->name }}</span>
                                                             </td>
                                                             <td class="nk-tb-col tb-col-md">
-                                                                {{ $user->phone }}
+                                                                <span>{{ $package->area }}</span>
+                                                            </td>
+                                                            
+                                                            <td class="nk-tb-col tb-col-md">
+                                                                <span style="font-size: 11px;">
+                                                                    {{ $package->schedule }}
+                                                                </span>
                                                             </td>
                                                             <td class="nk-tb-col tb-col-md">
-                                                                @foreach ($user->roles as $role)
-                                                                    <span class="badge badge-info">{{ $role->name }}</span>
-                                                                @endforeach
+                                                                {{ $package->price_1 }}
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                {{ $package->price_2 }}
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                {{ $package->price_3 }}
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                {{ $package->price_extra }}
+                                                            </td>
+                                                            <td class="nk-tb-col">
+                                                                @if ($package->status == 0)
+                                                                    <span class="badge badge-dot badge-danger" style="font-size: 11px; font-weight: bold;">Inactive</span>
+                                                                @else
+                                                                    <span class="badge badge-dot badge-success" style="font-size: 11px; font-weight: bold">Active</span>
+                                                                @endif
                                                             </td>
                                                             {{-- <td class="nk-tb-col tb-col-lg" data-order="Email Verified - Kyc Unverified">
                                                                 <ul class="list-status">
@@ -112,11 +143,21 @@
                                                                 <span>05 Oct 2019</span>
                                                             </td> --}}
                                                             <td class="nk-tb-col text-center">
-                                                                <a href="{{ route('riders.edit', $user->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Edit user">
+                                                                @if ($package->status == 0)
+                                                                    <a href="{{ url('/packages/status', $package->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Mark as Active">
+                                                                        <em class="icon ni ni-check-circle-cut" style="color: #1ee0ac;"></em>
+                                                                    </a>
+                                                                @else
+                                                                    <a href="{{ url('/packages/status', $package->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Ban Merchant">
+                                                                        <em class="icon ni ni-cross-circle" style="color: #e85347;"></em>
+                                                                    </a>
+                                                                @endif
+                                                                
+                                                                <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Edit Merchant">
                                                                     <em class="icon ni ni-edit"></em>
                                                                 </a>
-                                                                <span data-target="#deleteModal{{ $user->id }}" data-toggle="modal">
-                                                                	<a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Delete Role">
+                                                                <span data-target="#deleteModal{{ $package->id }}" data-toggle="modal">
+                                                                	<a href="#" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Delete Merchant">
                                                                     <em class="icon ni ni-trash"></em>
                                                                 </a>
                                                                 </span>
@@ -161,7 +202,7 @@
                                                         </tr><!-- .nk-tb-item  -->
 
                                                         <!-- Delete Modal start -->
-				                                        <div class="modal fade" tabindex="-1" id="deleteModal{{ $user->id }}">
+				                                        <div class="modal fade" tabindex="-1" id="deleteModal{{ $package->id }}">
 				                                            <div class="modal-dialog modal-dialog-top" role="document">
 				                                                <div class="modal-content">
 				                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
@@ -174,7 +215,7 @@
 				                                                        
 				                                                    </div> --}}
 				                                                    <div class="modal-footer">
-				                                                        <form action="{{ route('riders.destroy', $user->id) }}" method="post">
+				                                                        <form action="{{ route('packages.destroy', $package->id) }}" method="post">
 				                                                        	@method('delete')
 				                                                            {{ csrf_field() }}
 				                                                            <button type="submit" class="btn btn-info btn-sm" style="font-size: 13px;">YES, delete permanently</button>
@@ -185,8 +226,6 @@
 				                                            </div>
 				                                        </div>
 				                                        <!-- Delete Modal end -->
-                                                        @endif
-                                                        @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>

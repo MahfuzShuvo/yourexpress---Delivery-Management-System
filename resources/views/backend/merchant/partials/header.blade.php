@@ -29,7 +29,7 @@
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                        <a href="{{ route('merchant_parcels.index') }}" class="nk-menu-link">
                             <span class="nk-menu-text">Parcels</span>
                         </a>
                     </li><!-- .nk-menu-item -->

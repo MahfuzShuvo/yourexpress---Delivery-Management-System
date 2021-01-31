@@ -82,6 +82,7 @@ blockquote { margin: 0 0 1rem; }
 b, strong { font-weight: bolder; }
 
 small { font-size: 80%; }
+ex-small { font-size: 50%; }
 
 sub, sup { position: relative; font-size: 75%; line-height: 0; vertical-align: baseline; }
 
@@ -9024,7 +9025,10 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before
   div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-link { padding-left: 1rem; padding-right: 1rem; }
   div.dataTables_wrapper div.dataTables_info { text-align: right !important; } }
 
-.dataTable tr { white-space: nowrap; }
+.dataTable tr { 
+  /*white-space: nowrap; */
+  font-size: 12px;
+}
 
 .dataTable td { white-space: nowrap; }
 
